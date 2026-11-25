@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GTA VI — Official Download | Presented by NJIT SAC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  /* ====== EDIT THESE ====== */
+  /* Asset paths are set in the CONFIG block in the <script> at the bottom. */
+
+  :root{
+    --pink:#ff2d95; --orange:#ff8a3d; --yellow:#ffd23f; --teal:#19e3d6; --purple:#6a2cff;
+    --bg:#0b0614; --card:#140b22; --line:rgba(255,255,255,.12); --text:#fff; --muted:#bfb3d6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+
+  /* ---------- NAV ---------- */
+  nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+      padding:14px 28px;background:linear-gradient(#0b0614ee,#0b061400);backdrop-filter:blur(6px)}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.08em;font-size:13px}
+  .brand img{height:38px;width:auto}
+  .brand .x{opacity:.5}
+  .brand .vi{font-family:Anton;font-size:26px;letter-spacing:.02em;
+      background:linear-gradient(90deg,var(--orange),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .navlinks{display:flex;gap:26px;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+  .navlinks a:hover{color:var(--pink)}
+  .navcta{padding:10px 18px;border-radius:999px;background:var(--pink);font-weight:800;font-size:12px;letter-spacing:.12em}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100vh;display:grid;place-items:center;text-align:center;overflow:hidden;
+      background:
+        radial-gradient(ellipse at 50% 120%, #ffd23f 0%, #ff8a3d 18%, #ff2d95 38%, #6a2cff 62%, #0b0614 82%)}
+  .sun{position:absolute;left:50%;bottom:22%;width:min(70vw,620px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;
+      background:linear-gradient(#ffe66b,#ff8a3d 55%,#ff2d95);
+      -webkit-mask:var(--sunmask);mask:var(--sunmask);
+      --sunmask:repeating-linear-gradient(to bottom,#000 0 58%,transparent 58% 60%,#000 60% 68%,transparent 68% 71%,#000 71% 78%,transparent 78% 82%,#000 82% 87%,transparent 87% 92%,#000 92%);
+      opacity:.9;filter:drop-shadow(0 0 80px #ff2d95)}
+  .palms{position:absolute;inset:auto 0 0 0;height:40%;pointer-events:none}
+  .grid{position:absolute;left:-50%;right:-50%;bottom:0;height:28%;
+      background:
+        linear-gradient(transparent 0 95%, #19e3d6aa 95%) 0 0/100% 40px,
+        linear-gradient(90deg, transparent 0 97%, #19e3d6aa 97%) 0 0/60px 100%;
+      transform:perspective(300px) rotateX(60deg);transform-origin:bottom;animation:grid 2s linear infinite;
+      -webkit-mask:linear-gradient(transparent,#000 40%);mask:linear-gradient(transparent,#000 40%)}
+  @keyframes grid{to{background-position:0 40px,0 0}}
+  .hero-inner{position:relative;z-index:2;padding:120px 20px 80px}
+  .presents{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border-radius:999px;background:#0008;border:1px solid var(--line);
+      font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:600}
+  .presents img{height:22px}
+  .logo{margin:22px 0 6px;line-height:.82}
+  .logo .gta{display:block;font-family:Anton;font-size:clamp(54px,11vw,150px);letter-spacing:.01em;
+      color:#fff;text-shadow:0 6px 0 #0006,0 0 40px #ff2d95}
+  .logo .six{display:block;font-family:Anton;font-size:clamp(120px,26vw,340px);
+      background:linear-gradient(180deg,#ffe66b 0%,#ff8a3d 40%,#ff2d95 75%,#a62cff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+      filter:drop-shadow(0 8px 0 #0007) drop-shadow(0 0 50px #ff2d9599)}
+  .tag{font-family:Pacifico;font-size:clamp(22px,3.6vw,40px);color:var(--teal);text-shadow:0 0 20px #19e3d6;margin-top:-10px}
+  .hero p.sub{max-width:620px;margin:22px auto 0;color:#fff;opacity:.9;font-size:17px;line-height:1.5}
+  .hero .actions{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-width:260px;padding:20px 34px;border:0;border-radius:14px;cursor:pointer;
+      font:800 16px/1 Inter;letter-spacing:.14em;text-transform:uppercase;color:#fff;
+      background:linear-gradient(90deg,var(--pink),var(--orange));box-shadow:0 10px 40px #ff2d9566, inset 0 -3px 0 #0003;transition:transform .15s, box-shadow .15s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 50px #ff2d9599}
+  .btn.ghost{background:#0007;border:1px solid #fff5;box-shadow:none;min-width:auto}
+  .btn[disabled]{cursor:wait;filter:saturate(.7)}
+  .spinner{width:20px;height:20px;border-radius:50%;border:3px solid #fff5;border-top-color:#fff;animation:spin .8s linear infinite;display:none}
+  .btn.loading .spinner{display:inline-block}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .dl-meta{margin-top:14px;font-size:12px;color:#fff;opacity:.75;letter-spacing:.08em}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:100px 24px;max-width:1180px;margin:0 auto}
+  .kicker{color:var(--pink);font-weight:800;letter-spacing:.3em;font-size:12px;text-transform:uppercase}
+  h2{font-family:Anton;font-size:clamp(40px,6vw,72px);line-height:1;margin:10px 0 18px;letter-spacing:.01em}
+  .lead{color:var(--muted);max-width:640px;line-height:1.6}
+
+  /* sponsor */
+  .sponsor{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+  .sponsor-card{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/5;
+      background:linear-gradient(160deg,#ff2d95,#6a2cff 60%,#0b0614);border:1px solid var(--line)}
+  .sponsor-card img.face{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:normal}
+  .sponsor-card .overlay{position:absolute;inset:auto 0 0 0;padding:24px;background:linear-gradient(transparent,#000d)}
+  .sponsor-card .name{font-family:Anton;font-size:46px;line-height:1}
+  .sponsor-card .role{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);margin-top:6px}
+  .wanted{position:absolute;top:18px;left:18px;display:flex;gap:4px}
+  .wanted span{font-size:26px;color:var(--yellow);text-shadow:0 0 10px #000}
+  .ph{position:absolute;inset:0;display:grid;place-items:center;color:#fff8;font-weight:600;font-size:14px;text-align:center;padding:20px}
+  .stamp{display:inline-flex;align-items:center;gap:14px;margin-top:26px;padding:14px 18px;border:1px dashed #fff4;border-radius:14px}
+  .stamp img{height:48px}
+  .stamp b{display:block;font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+  .stamp small{color:var(--muted);font-size:12px}
+
+  /* features */
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+  .feat{padding:26px;border-radius:18px;background:var(--card);border:1px solid var(--line)}
+  .feat .ico{font-size:30px}
+  .feat h3{margin:14px 0 8px;font-size:18px}
+  .feat p{color:var(--muted);font-size:14px;line-height:1.55}
+
+  /* download panel */
+  .panel{display:grid;grid-template-columns:1fr 1fr;gap:28px;padding:34px;border-radius:24px;background:
+      linear-gradient(135deg,#ff2d9522,#6a2cff22),var(--card);border:1px solid var(--line)}
+  .file{display:flex;gap:16px;align-items:center;padding:18px;border-radius:14px;background:#0006;border:1px solid var(--line);margin:22px 0}
+  .file .fi{width:54px;height:54px;border-radius:12px;display:grid;place-items:center;font-family:Anton;font-size:22px;
+      background:linear-gradient(135deg,var(--orange),var(--pink))}
+  .file b{display:block;font-size:15px;word-break:break-all}
+  .file small{color:var(--muted);font-size:12px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:11px 0;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;width:40%}
+  .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .badge{padding:7px 12px;border-radius:8px;background:#fff1;font-size:12px;font-weight:600;letter-spacing:.06em}
+  .check{color:var(--teal)}
+
+  footer{border-top:1px solid var(--line);padding:40px 24px;text-align:center;color:var(--muted);font-size:12px;line-height:1.8}
+  footer img{height:40px;margin-bottom:10px}
+
+  /* ---------- MODAL ---------- */
+  .modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;background:#000c;backdrop-filter:blur(8px);padding:20px}
+  .modal.show{display:grid}
+  .box{width:min(560px,100%);padding:30px;border-radius:20px;background:var(--card);border:1px solid var(--line);box-shadow:0 30px 80px #ff2d9544}
+  .box h4{font-family:Anton;font-size:30px;letter-spacing:.02em}
+  .box .step{color:var(--muted);font-size:14px;margin:8px 0 22px;min-height:20px}
+  .bar{height:14px;border-radius:999px;background:#fff1;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--pink),var(--orange));background-size:200% 100%;animation:shine 1.2s linear infinite}
+  @keyframes shine{to{background-position:-200% 0}}
+  .stats{display:flex;justify-content:space-between;margin-top:12px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .done{display:none;margin-top:22px;padding:14px;border-radius:12px;background:#19e3d61a;border:1px solid #19e3d655;font-size:14px}
+  .close{margin-top:20px;background:none;border:1px solid var(--line);color:#fff;padding:10px 16px;border-radius:10px;cursor:pointer;font:600 13px Inter;display:none}
+
+  @media (max-width:860px){
+    .navlinks{display:none}
+    .sponsor,.panel{grid-template-columns:1fr}
+    .features{grid-template-columns:1fr}
+    nav{padding:12px 16px}
+    section{padding:70px 16px}
+    .panel{padding:22px}
+    .btn{min-width:0;width:100%}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="#">
+    <img class="sac-logo" alt="NJIT SAC">
+    <span class="x">×</span>
+    <span class="vi">GTA VI</span>
+  </a>
+  <div class="navlinks">
+    <a href="#sponsor">Sponsor</a>
+    <a href="#features">Features</a>
+    <a href="#download">Download</a>
+  </div>
+  <a class="navcta" href="#download">Get it now</a>
+</nav>
+
+<header class="hero">
+  <div class="sun"></div>
+  <div class="grid"></div>
+  <div class="hero-inner">
+    <div class="presents"><img class="sac-logo" alt="">NJIT SAC Presents</div>
+    <h1 class="logo"><span class="gta">GRAND THEFT AUTO</span><span class="six">VI</span></h1>
+    <div class="tag">Welcome to Leonida</div>
+    <p class="sub">The NJIT Student Activities Council is proud to be the <b>Official Campus Sponsor</b> of Grand Theft Auto VI. Free full-game download for all NJIT students — while it lasts.</p>
+    <div class="actions">
+      <button class="btn dl-btn"><span class="spinner"></span><span class="label">Download Free</span></button>
+      <a class="btn ghost" href="#download">System Requirements</a>
+    </div>
+    <div class="dl-meta">PC · Full Game · <span class="fsize"></span> · v1.0.0 · Verified by NJIT SAC</div>
+  </div>
+</header>
+
+<section id="sponsor">
+  <div class="sponsor">
+    <div>
+      <div class="kicker">Official Sponsorship</div>
+      <h2>NJIT SAC × GTA VI</h2>
+      <p class="lead">This year, the Student Activities Council secured an exclusive campus partnership to bring Grand Theft Auto VI to every Highlander. No credit card. No waitlist. Just hit download and head to Vice City.</p>
+      <p class="lead" style="margin-top:14px">Personally approved by Kostas. ★★★★★</p>
+      <div class="stamp">
+        <img class="sac-logo" alt="">
+        <div><b>SAC Verified</b><small>Official NJIT Student Activities Council release</small></div>
+      </div>
+    </div>
+    <div class="sponsor-card">
+      <div class="ph"></div>
+      <img class="face" alt="Kostas">
+      <div class="wanted"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <div class="overlay">
+        <div class="name">KOSTAS</div>
+        <div class="role">Executive Producer · NJIT SAC</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features" style="padding-top:20px">
+  <div class="kicker">What's inside</div>
+  <h2>The biggest Vice City ever.</h2>
+  <div class="features">
+    <div class="feat"><div class="ico">🌴</div><h3>The State of Leonida</h3><p>Explore Vice City and beyond in the largest, most detailed open world in series history.</p></div>
+    <div class="feat"><div class="ico">🚗</div><h3>Full Single Player</h3><p>The complete story campaign, unlocked from day one for NJIT students.</p></div>
+    <div class="feat"><div class="ico">🎓</div><h3>Highlander Edition</h3><p>Exclusive SAC-sponsored build. Includes bonus content you won't find anywhere else.</p></div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="panel">
+    <div>
+      <div class="kicker">Download</div>
+      <h2 style="font-size:clamp(36px,5vw,56px)">Get GTA VI</h2>
+      <p class="lead">One-click installer. Your download starts once your NJIT student status is verified.</p>
+      <div class="file">
+        <div class="fi">VI</div>
+        <div><b class="fname-display"></b><small><span class="fsize"></span> · SHA-256 verified · NJIT SAC Mirror</small></div>
+      </div>
+      <button class="btn dl-btn"><span class="spinner"></span><span class="label">Download Now</span></button>
+      <div class="badges">
+        <span class="badge"><span class="check">✔</span> Virus scanned</span>
+        <span class="badge"><span class="check">✔</span> SAC Verified</span>
+        <span class="badge"><span class="check">✔</span> Free for students</span>
+      </div>
+    </div>
+    <div>
+      <div class="kicker" style="color:var(--teal)">Minimum Requirements</div>
+      <table style="margin-top:14px">
+        <tr><th>OS</th><td>Windows 11 64-bit</td></tr>
+        <tr><th>Processor</th><td>Intel Core i7-12700K / AMD Ryzen 7 7700X</td></tr>
+        <tr><th>Memory</th><td>32 GB RAM</td></tr>
+        <tr><th>Graphics</th><td>NVIDIA RTX 4070 / AMD RX 7800 XT</td></tr>
+        <tr><th>Storage</th><td><span class="fsize"></span> available (SSD required)</td></tr>
+        <tr><th>Network</th><td>NJIT Wi-Fi recommended</td></tr>
+        <tr><th>Version</th><td>1.0.0 (Highlander Edition)</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <img class="sac-logo" alt=""><br>
+  Presented by the NJIT Student Activities Council<br>
+  © 2026 NJIT SAC. Fan event page — not affiliated with or endorsed by Rockstar Games or Take-Two Interactive.
+</footer>
+
+<!-- download modal -->
+<div class="modal" id="modal">
+  <div class="box">
+    <h4>DOWNLOADING GTA VI</h4>
+    <div class="step" id="step">Connecting to NJIT SAC servers…</div>
+    <div class="bar"><i id="bar"></i></div>
+    <div class="stats"><span id="got">0.0 GB / 200.0 GB</span><span id="speed">— MB/s</span></div>
+    <div class="done" id="done">✔ Download started: <b class="fname-display"></b> (<span class="fsize"></span>). Check your downloads folder.</div>
+    <button class="close" id="close">Close</button>
+  </div>
+</div>
+
+<script>
+  /* ================== CONFIG ================== */
+  const CONFIG = {
+    sacLogo:   "assets/sac-logo.png",   // NJIT SAC logo
+    kostas:    "assets/kostas.png",     // Kostas's face
+    poster:    "assets/poster.png",     // the REAL file that gets downloaded
+    // Name the downloaded file gets saved as (keep the real extension so it opens):
+    saveAs:    "GTA_VI_Full_Game_200GB.png",
+    // What the page *shows* as the file:
+    fakeName:  "GTA_VI_Setup_Highlander_Edition.zip",
+    fakeSize:  "200.0 GB",
+    fakeGB:    200,
+    loadMs:    7000,                    // loading time before download fires
+    sikePage:  "sike.html",             // page shown after the "download"
+    redirectMs: 1500                    // pause after download starts before redirecting
+  };
+  /* ============================================ */
+
+  // Fill in images (hide if missing)
+  document.querySelectorAll(".sac-logo").forEach(img => {
+    img.src = CONFIG.sacLogo;
+    img.onerror = () => img.style.display = "none";
+  });
+  const face = document.querySelector(".face");
+  face.src = CONFIG.kostas;
+  face.onerror = () => face.style.display = "none";
+  face.onload  = () => document.querySelector(".ph").style.display = "none";
+
+  document.querySelectorAll(".fsize").forEach(e => e.textContent = CONFIG.fakeSize);
+  document.querySelectorAll(".fname-display").forEach(e => e.textContent = CONFIG.fakeName);
+
+  const steps = [
+    "Connecting to NJIT SAC servers…",
+    "Verifying NJIT student status…",
+    "Authenticating with Highlander license…",
+    "Allocating 200 GB on disk…",
+    "Fetching game files from SAC mirror…",
+    "Finalizing download…"
+  ];
+
+  const modal = document.getElementById("modal");
+  const bar = document.getElementById("bar");
+  const step = document.getElementById("step");
+  const got = document.getElementById("got");
+  const speed = document.getElementById("speed");
+  const done = document.getElementById("done");
+  const closeBtn = document.getElementById("close");
+  const buttons = document.querySelectorAll(".dl-btn");
+  let busy = false;
+
+  function triggerDownload(){
+    const a = document.createElement("a");
+    a.href = CONFIG.poster;
+    a.download = CONFIG.saveAs;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  function start(){
+    if (busy) return;
+    busy = true;
+    buttons.forEach(b => { b.disabled = true; b.classList.add("loading"); b.querySelector(".label").textContent = "Preparing…"; });
+    modal.classList.add("show");
+    done.style.display = "none"; closeBtn.style.display = "none";
+
+    const t0 = performance.now();
+    (function tick(now){
+      const p = Math.min((now - t0) / CONFIG.loadMs, 1);
+      const eased = 1 - Math.pow(1 - p, 2.2);
+      bar.style.width = (eased * 100) + "%";
+      got.textContent = (eased * CONFIG.fakeGB).toFixed(1) + " GB / " + CONFIG.fakeSize;
+      speed.textContent = (900 + Math.random() * 400).toFixed(0) + " MB/s";
+      step.textContent = steps[Math.min(Math.floor(p * steps.length), steps.length - 1)];
+      if (p < 1) return requestAnimationFrame(tick);
+
+      got.textContent = CONFIG.fakeSize + " / " + CONFIG.fakeSize;
+      speed.textContent = "Complete";
+      step.textContent = "Download complete.";
+      triggerDownload();
+      done.style.display = "block";
+      setTimeout(() => { location.href = CONFIG.sikePage; }, CONFIG.redirectMs);
+    })(t0);
+  }
+
+  buttons.forEach(b => b.addEventListener("click", start));
+  closeBtn.addEventListener("click", () => modal.classList.remove("show"));
+</script>
+</body>
+</html>
