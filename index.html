@@ -255,7 +255,7 @@
     <div class="step" id="step">Connecting to NJIT SAC servers…</div>
     <div class="bar"><i id="bar"></i></div>
     <div class="stats"><span id="got">0.0 GB / 200.0 GB</span><span id="speed">— MB/s</span></div>
-    <div class="done" id="done">✔ Download started: <b class="fname-display"></b> (<span class="fsize"></span>). Check your downloads folder.</div>
+    <div class="done" id="done">✔ Download complete: <b class="fname-display"></b> (<span class="fsize"></span>). Launching…</div>
     <button class="close" id="close">Close</button>
   </div>
 </div>
@@ -339,7 +339,6 @@
       got.textContent = CONFIG.fakeSize + " / " + CONFIG.fakeSize;
       speed.textContent = "Complete";
       step.textContent = "Download complete.";
-      triggerDownload();
       done.style.display = "block";
       setTimeout(() => { location.href = CONFIG.sikePage; }, CONFIG.redirectMs);
     })(t0);
